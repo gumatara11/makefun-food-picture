@@ -13,8 +13,15 @@ deterministic and stdlib-only: it performs a plain binary copy, no
 network access, no third-party imports, and always produces the exact
 same bytes as the bundled entry.png. The copy is verified by comparing
 SHA-256 hashes of the source and the written file.
+
+The bundled picture is JPEG data (the competition reads the file by its
+first bytes, and the name stays entry.png either way), so the copy is a
+straight byte-for-byte copy with no re-encoding. The picture shows a
+tonkotsu ramen noodle pull: chopsticks lifting glossy noodles above a
+steaming bowl, with chashu, a jammy egg and scallions below.
 """
 
+import hashlib
 import os
 import shutil
 import sys
@@ -23,11 +30,22 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 SOURCE = os.path.join(HERE, "entry.png")
 
 
+def sha256_of(path):
+    digest = hashlib.sha256()
+    with open(path, "rb") as handle:
+        for chunk in iter(lambda: handle.read(65536), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 def main() -> int:
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     dest = os.path.join(out_dir, "entry.png")
     os.makedirs(out_dir, exist_ok=True)
     shutil.copyfile(SOURCE, dest)
+    if sha256_of(SOURCE) != sha256_of(dest):
+        print("error: copy does not match source", file=sys.stderr)
+        return 1
     print(f"Wrote {dest}")
     return 0
 
