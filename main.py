@@ -18,11 +18,13 @@ The bundled picture is JPEG data (the competition reads the file by its
 first bytes, and the name stays entry.png either way), so the copy is a
 straight byte-for-byte copy with no re-encoding. The picture shows a
 tonkotsu ramen bowl on a dark wooden table, shot square from a high
-angle: wooden chopsticks lifting a tall, neat pull of glossy noodles
-with creamy broth dripping, a vivid red chili-oil spiral across the
-broth, an upright nori sheet at the left rim, a fan of seared chashu,
-a jammy egg with its golden yolk dripping, and generous scallions and
-sesame, steam curling through warm backlight.
+angle: wooden chopsticks lifting a tall pull of glossy noodles flecked
+with red chili flakes and scallion rings, creamy broth dripping; a large
+upright nori sheet at the left rim; a fan of seared chashu with charred
+edges and sesame; two halved jammy eggs with bright orange runny yolks;
+a generous pile of scallions, a mound of red chili crisp, red chili-oil
+pools in the broth, and dark wood-ear mushroom strips, steam curling
+through warm lantern light.
 """
 
 import hashlib
